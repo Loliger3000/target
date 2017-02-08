@@ -1,0 +1,54 @@
+<html>
+	<head>
+	<title>Target</title>
+	<style>
+		body {
+			color: #7CFC00;
+		}
+		canvas {
+			border: 3.5px solid #7CFC00;
+		}
+	</style>
+	</head>
+	<body>
+		<script src="jquery.js"></script>
+		<script type="text/javascript">
+		// self executing function here
+		$(function() {
+	   		// your page initialization code here
+	   		// the DOM will be available here
+
+	   		// get canvas and 2d context
+			var canvas = document.getElementById('game');
+			var ctx = canvas.getContext('2d');
+
+			// ball
+	   		function Ball(x, y, size){
+				this.x = x;
+				this.y = y;
+				this.size = size;
+				this.draw = function() {
+					ctx.beginPath();
+					ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+					ctx.stroke();
+				};
+			}
+
+			// application
+			var ball1 = new Ball(100, 100, 50);
+			ball1.draw();
+
+			var ball2 = new Ball(200, 200, 50);
+			ball2.draw();
+
+			var ball3 = new Ball(300, 300, 50);
+			ball3.draw();
+
+			var ball4 = new Ball(400, 400, 50);
+			ball4.draw();
+		});
+		</script>
+
+		<canvas id="game" width="500" height="500"></canvas>
+	</body>
+</html>
