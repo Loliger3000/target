@@ -22,6 +22,8 @@
 			var canvas = document.getElementById('game');
 			var ctx = canvas.getContext('2d');
 
+
+
 			// ball
 	   		function Ball(x, y, size){
 				this.x = x;
@@ -29,8 +31,10 @@
 				this.size = size;
 				this.draw = function() {
 					ctx.beginPath();
-					ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+					ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
 					ctx.stroke();
+					ctx.fillStyle="#7CFC00"
+					ctx.fill();
 				};
 			}
 
