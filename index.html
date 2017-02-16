@@ -39,8 +39,8 @@
 					ctx.beginPath();
 					ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
 					ctx.stroke();
-					//ctx.fillStyle ="#7CFC00";
-					//ctx.fill();
+					ctx.fillStyle ="#7CFC00";
+					ctx.fill();
 				};
 
 				// updates x and y coordinates
@@ -52,8 +52,9 @@
 
 			// main game loop to draw next frame
 			function loop(balls) {
-				ctx.fillRect(0, 0, canvas.width, canvas.height);
 				ctx.fillStyle="#FFF";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
 
 				for( i = 0; i < balls.length; i++) {
 					balls[i].nextFrame();
@@ -67,10 +68,10 @@
 			};
 
 			// application
-			var ball1 = new Ball(250, 250, 50, -1, 0);
-			var ball2 = new Ball(250, 250, 50, 1, 0);
-			var ball3 = new Ball(250, 250, 50, 0, -1);
-			var ball4 = new Ball(250, 250, 50, 0, 1);
+			var ball1 = new Ball(250, 200, 50, -1, 0);
+			var ball2 = new Ball(250, 300, 50, 1, 0);
+			var ball3 = new Ball(200, 250, 50, 0, -1);
+			var ball4 = new Ball(300, 250, 50, 0, 1);
 
 			var balls = [ball1, ball2, ball3, ball4];
 			
@@ -78,6 +79,9 @@
 		});
 		</script>
 
-		<canvas id="game" width="500" height="500"></canvas>
+		 <canvas id="game" width="500" height="500"></canvas> 
+		<img src ="borderpicture_right_target.png"/>
+		<br>
+		<img src ="borderpicture_under_target.png"/>
 	</body>
 </html>
