@@ -11,11 +11,28 @@
 	</style>
 	</head>
 	<body>
+		<button id="start">Start</button>
+		<button id="stop">Stop</button>
+		<br>
 		<script src="jquery.js"></script>
 		<script type="text/javascript">
 		// self executing function 
 		$(function() {
-	   		// the DOM will be available 
+	   		// the DOM will be available
+	   		var startButton = document.getElementById('start')
+	   		startButton.addEventListener("click", startGame)
+
+	   		function startGame(){
+	   			window.gameRunning = true;
+	   			loop(balls);
+	   		}
+
+	   		var stopButton = document.getElementById('stop')
+	   		stopButton.addEventListener("click", stopGame)
+
+	   		function stopGame(){
+	   			window.gameRunning = false;
+	   		}
 
 	   		// get canvas and 2d context
 			var canvas = document.getElementById('game');
@@ -52,9 +69,10 @@
 
 			// main game loop to draw next frame
 			function loop(balls) {
+				if(window.gameRunning == false){ return; }
+
 				ctx.fillStyle="#FFF";
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
-				
 
 				for( i = 0; i < balls.length; i++) {
 					balls[i].nextFrame();
@@ -74,8 +92,6 @@
 			var ball4 = new Ball(300, 250, 50, 0, 1);
 
 			var balls = [ball1, ball2, ball3, ball4];
-			
-			loop(balls);
 		});
 		</script>
 
