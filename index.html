@@ -15,6 +15,7 @@
 		<button id="stop">Stop</button>
 		<br>
 		<script src="jquery.js"></script>
+		<script src="easel.js"></script>
 		<script type="text/javascript">
 		// self executing function 
 		$(function() {
@@ -24,7 +25,6 @@
 
 	   		function startGame(){
 	   			window.gameRunning = true;
-	   			loop(balls);
 	   		}
 
 	   		var stopButton = document.getElementById('stop')
@@ -37,6 +37,7 @@
 	   		// get canvas and 2d context
 			var canvas = document.getElementById('game');
 			var ctx = canvas.getContext('2d');
+			window.stage = new createjs.Stage("game");
 
 			// ball
 	   		function Ball(x, y, size, speedY, speedX){
@@ -53,11 +54,10 @@
 
 				// draw a ball on a canvas
 				this.draw = function() {
-					ctx.beginPath();
-					ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
-					ctx.stroke();
-					ctx.fillStyle ="#7CFC00";
-					ctx.fill();
+					circle = new createjs.Shape();
+					circle.graphics.beginFill("red").drawCircle(this.x, this.y, this.size);
+					circle.addEventListener("click", function(e) { console.log(e)});
+					window.stage.addChild(circle);
 				};
 
 				// updates x and y coordinates
@@ -65,25 +65,20 @@
 					this.y = this.y + this.speedY;
 					this.x = this.x + this.speedX;
 				};
-			}
+			};
 
 			// main game loop to draw next frame
-			function loop(balls) {
+			 createjs.Ticker.addEventListener("tick", handleTick);
+			 function handleTick(event) {
 				if(window.gameRunning == false){ return; }
-
-				ctx.fillStyle="#FFF";
-				ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 				for( i = 0; i < balls.length; i++) {
 					balls[i].nextFrame();
 				};
 
-				var lazyLoop = function(){
-					loop(balls);
-				};
-
-				requestAnimationFrame(lazyLoop);
-			};
+				window.stage.clear(); // This is not working yet -> Fix me
+				window.stage.update();
+			 }
 
 			// application
 			var ball1 = new Ball(250, 200, 50, -1, 0);
@@ -95,7 +90,7 @@
 		});
 		</script>
 
-		 <canvas id="game" width="500" height="500"></canvas> 
+		<canvas id="game" width="500" height="500"></canvas> 
 		<img src ="borderpicture_right_target.png"/>
 		<br>
 		<img src ="borderpicture_under_target.png"/>
