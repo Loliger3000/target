@@ -25,6 +25,7 @@
 
 	   		function startGame(){
 	   			window.gameRunning = true;
+	   			createjs.Ticker.addEventListener("tick", handleTick);
 	   		}
 
 	   		var stopButton = document.getElementById('stop')
@@ -67,8 +68,7 @@
 				};
 			};
 
-			// main game loop to draw next frame
-			 createjs.Ticker.addEventListener("tick", handleTick);
+			// main game loop to draw next frame	
 			 function handleTick(event) {
 				if(window.gameRunning == false){ return; }
 
