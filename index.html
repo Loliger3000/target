@@ -11,9 +11,6 @@
 	</style>
 	</head>
 	<body>
-		<button id="start">Start</button>
-		<button id="stop">Stop</button>
-		<br>
 		<script src="jquery.js"></script>
 		<script src="easel.js"></script>
 		<script type="text/javascript">
@@ -77,14 +74,6 @@
 			// create stage (draw on canvas)
 			window.stage = new createjs.Stage("game");
 
-			// start game on click
-			var startButton = document.getElementById('start')
-	   		startButton.addEventListener("click", startGame)
-
-	   		// stop game on click
-	   		var stopButton = document.getElementById('stop')
-	   		stopButton.addEventListener("click", stopGame)
-
 			// create 4 balls
 			var ball1 = new Ball(250, 200, 50, -1, 0);
 			var ball2 = new Ball(250, 300, 50, 1, 0);
@@ -96,6 +85,16 @@
 			// initialize all balls once
 			for( i = 0; i < balls.length; i++) {
 				balls[i].init();
+			};
+
+			document.onkeypress = function(e){
+				if(e.code == "Space"){
+					if(window.gameRunning == true){
+						stopGame();
+					} else {
+						startGame();
+					};
+				};
 			};
 		});
 		</script>
