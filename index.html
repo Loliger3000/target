@@ -17,30 +17,23 @@
 		<script src="jquery.js"></script>
 		<script src="easel.js"></script>
 		<script type="text/javascript">
-		// self executing function 
-		$(function() {
-	   		// the DOM will be available
-	   		var startButton = document.getElementById('start')
-	   		startButton.addEventListener("click", startGame)
 
+		// self executing function 
+		$(function() {			
+	   		// the DOM will be available
+
+	   		// define start game function
 	   		function startGame(){
 	   			window.gameRunning = true;
 	   			createjs.Ticker.addEventListener("tick", handleTick);
 	   		}
 
-	   		var stopButton = document.getElementById('stop')
-	   		stopButton.addEventListener("click", stopGame)
-
+	   		// define stop game function
 	   		function stopGame(){
 	   			window.gameRunning = false;
 	   		}
 
-	   		// get canvas and 2d context
-			var canvas = document.getElementById('game');
-			var ctx = canvas.getContext('2d');
-			window.stage = new createjs.Stage("game");
-
-			// ball
+			// define ball object (function)
 	   		function Ball(x, y, size, speedY, speedX){
 				this.x = x;
 				this.y = y;
@@ -48,45 +41,62 @@
 				this.speedX = speedX;
 				this.size = size;
 
-				this.nextFrame = function (){
-					this.draw();
-					this.update();
+				// initialize ball (create shape, add to stage and listen to clicks)
+				this.init = function() {
+					this.shape = new createjs.Shape();
+
+					window.stage.addChild(this.shape);
+
+					this.shape.addEventListener("click", function(e) { console.log(e)});
 				};
 
-				// draw a ball on a canvas
-				this.draw = function() {
-					circle = new createjs.Shape();
-					circle.graphics.beginFill("red").drawCircle(this.x, this.y, this.size);
-					circle.addEventListener("click", function(e) { console.log(e)});
-					window.stage.addChild(circle);
-				};
-
-				// updates x and y coordinates
+				// update ball (clear all previous graphics, update position and draw new circle)
 				this.update = function(){
+					this.shape.graphics.clear();
+
 					this.y = this.y + this.speedY;
 					this.x = this.x + this.speedX;
+
+					this.shape.graphics.beginFill("red").drawCircle(this.x, this.y, this.size);
 				};
 			};
 
 			// main game loop to draw next frame	
-			 function handleTick(event) {
+			function handleTick(event) {
 				if(window.gameRunning == false){ return; }
 
 				for( i = 0; i < balls.length; i++) {
-					balls[i].nextFrame();
+					balls[i].update();
 				};
 
-				window.stage.clear(); // This is not working yet -> Fix me
 				window.stage.update();
-			 }
+			};
 
-			// application
+			// main application
+
+			// create stage (draw on canvas)
+			window.stage = new createjs.Stage("game");
+
+			// start game on click
+			var startButton = document.getElementById('start')
+	   		startButton.addEventListener("click", startGame)
+
+	   		// stop game on click
+	   		var stopButton = document.getElementById('stop')
+	   		stopButton.addEventListener("click", stopGame)
+
+			// create 4 balls
 			var ball1 = new Ball(250, 200, 50, -1, 0);
 			var ball2 = new Ball(250, 300, 50, 1, 0);
 			var ball3 = new Ball(200, 250, 50, 0, -1);
 			var ball4 = new Ball(300, 250, 50, 0, 1);
 
 			var balls = [ball1, ball2, ball3, ball4];
+
+			// initialize all balls once
+			for( i = 0; i < balls.length; i++) {
+				balls[i].init();
+			};
 		});
 		</script>
 
