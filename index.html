@@ -31,13 +31,14 @@
 	   		}
 
 			// define ball object (function)
-	   		function Ball(x, y, size, speedY, speedX){
+	   		function Ball(x, y, size, speedY, speedX, color){
 				this.x = x;
 				this.y = y;
 				this.speedY = speedY;
 				this.speedX = speedX;
 				this.size = size;
-
+				this.color = color;
+				
 				// initialize ball (create shape, add to stage and listen to clicks)
 				this.init = function() {
 					this.shape = new createjs.Shape();
@@ -54,8 +55,9 @@
 					this.y = this.y + this.speedY;
 					this.x = this.x + this.speedX;
 
-					this.shape.graphics.beginFill("red").drawCircle(this.x, this.y, this.size);
+					this.shape.graphics.beginFill(this.color).drawCircle(this.x, this.y, this.size);
 				};
+
 			};
 
 			// main game loop to draw next frame	
@@ -74,11 +76,22 @@
 			// create stage (draw on canvas)
 			window.stage = new createjs.Stage("game");
 
+			function randomColor() {
+			    var letters = '0123456789ABCDEF';
+		   		var color = '#';
+		    	for (var i = 0; i < 6; i++ ) {
+		        	color += letters[Math.floor(Math.random() * 16)];
+		    	};
+		    	return color;
+			};
+
+			console.log(randomColor());
+
 			// create 4 balls
-			var ball1 = new Ball(250, 200, 50, -1, 0);
-			var ball2 = new Ball(250, 300, 50, 1, 0);
-			var ball3 = new Ball(200, 250, 50, 0, -1);
-			var ball4 = new Ball(300, 250, 50, 0, 1);
+			var ball1 = new Ball(250, 200, 50, -1, 0, randomColor());
+			var ball2 = new Ball(250, 300, 50, 1, 0, randomColor());
+			var ball3 = new Ball(200, 250, 50, 0, -1, randomColor());
+			var ball4 = new Ball(300, 250, 50, 0, 1, randomColor());
 
 			var balls = [ball1, ball2, ball3, ball4];
 
