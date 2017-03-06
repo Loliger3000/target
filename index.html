@@ -64,6 +64,8 @@
 				this.update = function(){
 					this.shape.graphics.clear();
 
+					if(this.hit == true) { return };
+
 					this.y = this.y + this.speedY;
 					this.x = this.x + this.speedX;
 
