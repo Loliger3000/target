@@ -95,11 +95,16 @@
 			// create stage (draw on canvas)
 			window.stage = new createjs.Stage("game");
 
+			// random ball size
+			function randomBallSize() {
+				return Math.floor((Math.random() * 10) + 10);
+			};
+
 			// create 4 balls
-			var ball1 = new Ball(250, 200, 50, -1, 0);
-			var ball2 = new Ball(250, 300, 50, 1, 0);
-			var ball3 = new Ball(200, 250, 50, 0, -1);
-			var ball4 = new Ball(300, 250, 50, 0, 1);
+			var ball1 = new Ball(250, 200, randomBallSize(), -1, 0);
+			var ball2 = new Ball(250, 300, randomBallSize(), 1, 0);
+			var ball3 = new Ball(200, 250, randomBallSize(), 0, -1);
+			var ball4 = new Ball(300, 250, randomBallSize(), 0, 1);
 
 			var balls = [ball1, ball2, ball3, ball4];
 
