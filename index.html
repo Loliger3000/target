@@ -55,6 +55,8 @@
 
 					this.shape.addEventListener("click", function(e) {
 						this.hit = true;
+						var currentScore = window.score;
+						window.score = currentScore + 100;
 					}.bind(this));
 
 					window.stage.addChild(this.shape);
@@ -75,6 +77,9 @@
 
 			// main game loop to draw next frame	
 			function handleTick(event) {
+				var $score = $('#score');
+				$score.html(window.score);
+
 				if(window.gameRunning == false){ return; }
 
 				var hitState = [];
@@ -92,8 +97,15 @@
 
 			// main application
 
+			// inital score
+			window.score = 0;
+
 			// create stage (draw on canvas)
 			window.stage = new createjs.Stage("game");
+
+			// set score to 0
+			var $score = $('#score');
+			$score.html("0");
 
 			// random ball size
 			function randomBallSize() {
@@ -126,6 +138,7 @@
 		});
 		</script>
 
+		<div id="score"></div>
 		<canvas id="game" width="500" height="500"></canvas> 
 		<img src ="borderpicture_right_target.png"/>
 		<br>
