@@ -55,13 +55,20 @@
 
 					this.shape.addEventListener("click", function(e) {
 						this.hit = true;
+						this.hitAt = Date.now();
 						var currentScore = window.score;
-						window.score = currentScore + 100;
+						window.score = currentScore + this.points();
 					}.bind(this));
 
 					window.stage.addChild(this.shape);
+					this.createdAt = Date.now();
 				};
-
+				this.points = function() {
+					var multiplicator = 1/(this.hitAt - this.createdAt);
+					var floatPoints = 1000000 * multiplicator;
+					var roundedPoints = Math.round(floatPoints);
+					return roundedPoints;
+				};
 				// update ball (clear all previous graphics, update position and draw new circle)
 				this.update = function(){
 					this.shape.graphics.clear();
