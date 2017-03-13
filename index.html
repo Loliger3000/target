@@ -64,8 +64,9 @@
 					this.createdAt = Date.now();
 				};
 				this.points = function() {
-					var multiplicator = 1/(this.hitAt - this.createdAt);
-					var floatPoints = 1000000 * multiplicator;
+					var timeMultiplicator = 1/(this.hitAt - this.createdAt);
+					var sizeMultiplicator = 1/this.size;
+					var floatPoints = 10000000 * timeMultiplicator * sizeMultiplicator;
 					var roundedPoints = Math.round(floatPoints);
 					return roundedPoints;
 				};
