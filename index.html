@@ -11,21 +11,19 @@
 		#points {
 			font-size: 280%;
 			color: black;
-			display: inline-block;
 		}
 		#label {
 			color:black;
-			display: inline-block;
 			font-size:280%;
 		}
 		#score {
-			margin-top:100px;
-			margin-right:75px;
-			float:right;
+			margin-top:50px;
+			text-align: center;
 		}
 		#app{
-			width:760px;
-			height:760px;
+			margin: 0 auto;
+			width:500px;
+			height:600px;
 		}
 	</style>
 	</head>
@@ -166,8 +164,6 @@
 		</script>
 		<div id="app">
 			<canvas id="game" width="500" height="500"></canvas> 
-			<img src ="borderpicture_right_target.png"/>		
-			<img src ="borderpicture_under_target.png"/>
 			<div id="score">
 				<span id="label">Score:</span>
 				<span id="points"></span>
