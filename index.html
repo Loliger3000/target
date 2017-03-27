@@ -10,33 +10,55 @@
 		<script src="javascripts/bootstrap.min.js"></script>
 		<script src="javascripts/application.js"></script>
 		<script type="text/javascript">
-			$(function() { main() });
+			$(function() {
+				main();
+			});
 		</script>
 
 		<div id="header">
 			<ul class="nav nav-tabs">
-				<li><a class="navbar-brand" href="#">Target</a></li>
-				<li role="presentation" class="active"><a href="#">How to Play</a></li>
+				<li><a class="navbar-brand" href="#" >Target</a></li>
+				<li role="presentation"><a href="#" data-show-page="how-to-play">How to Play</a></li>
 	  			<li role="presentation" class="dropdown">
-	  				<a id="playButton" href="#" data-toggle="dropdown">Play <span class="caret"></span></a>		
+	  				<a data-show-page="play" id="playButton" href="#" data-toggle="dropdown">Play <span class="caret"></span></a>		
 	  				<ul class="dropdown-menu" aria-labelledby="playButton">
-	  					<li role="presentation"><a href="#">Mode 1</a></li>
-	  					<li role="presentation"><a href="#">Mode 2</a></li>
+	  					<li role="presentation"><a href="#" data-show-page="play-mode-one">Mode 1</a></li>
+	  					<li role="presentation"><a href="#" data-show-page="play-mode-two">Mode 2</a></li>
 					</ul>
 	  			</li>
-	  			<li role="presentation"><a href="#">Profile</a></li>
-	  			<li role="presentation"><a href="#">Friends</a></li>
-	  			<li role="presentation"><a href="#">Ranking</a></li>
+	  			<li role="presentation"><a href="#" data-show-page="profile">Profile</a></li>
+	  			<li role="presentation"><a href="#" data-show-page="friends" >Friends</a></li>
+	  			<li role="presentation"><a href="#" data-show-page="rankings">Ranking</a></li>
 			</ul>
 		</div>
 
 		<div id="content">
-			<div id="app">
+			<div data-page="how-to-play">
+				HOW TO PLAY PAGE
+			</div>
+
+			<div id="app" data-page="play-mode-one">
 				<canvas id="game" width="500" height="500"></canvas> 
 				<div id="score">
 					<span id="label">Score:</span>
 					<span id="points"></span>
 				</div>
+			</div>
+
+			<div id="app" data-page="play-mode-two">
+				PLAY MODE 2 NOT IMPLEMENTED YET
+			</div>
+
+			<div data-page="profile">
+				PROFILE PAGE
+			</div>
+
+			<div data-page="friends">
+				FRIENDS PAGE
+			</div>
+
+			<div data-page="rankings">
+				RANKINGS PAGE
 			</div>
 		</div>
 		

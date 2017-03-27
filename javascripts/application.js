@@ -83,7 +83,51 @@ function main(){
 		window.stage.update();
 	};
 
+	function hideAllPages() {
+		$("#content").find("[data-page]").hide();
+	};
+
+	function markAllTabsAsNonActive() {
+		var tabs = $("#header").find("[data-show-page]").parent();
+		for(i = 0; i < tabs.length; i++) {
+			$(tabs[i]).removeClass('active');
+		};
+	}
+
+	function showPage(pageName) {
+		// hide all pages
+		hideAllPages();
+
+		// fade in clicked page
+		var page = $($("#content").find("[data-page=" + pageName + "]"));
+		page.fadeToggle( "slow", "linear" );
+
+		// mark all tabs as non-active
+		markAllTabsAsNonActive();
+
+		// mark clicked tab as active
+		if(pageName == "play-mode-one" || pageName == "play-mode-two") {
+			var li = $($("#header").find("[data-show-page=play]").parent());
+		} else {
+			var li = $($("#header").find("[data-show-page=" + pageName + "]").parent());
+		}
+
+		li.addClass('active');
+	};
+
+	function displayPageOnClick() {
+		var links = $("#header").find("[data-show-page]");
+		for(i = 0; i < links.length; i++) {
+			links[i].addEventListener("click", function() {
+				var page = $(this).attr("data-show-page");
+				showPage(page);
+			})					
+		};
+	};
+
 	// main application
+	hideAllPages();
+	displayPageOnClick();
 
 	// inital points
 	window.points = 0;
