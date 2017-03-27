@@ -1,0 +1,35 @@
+body {
+	color: #7CFC00;
+}
+
+canvas {
+	border: 3px solid #7CFC00;
+}
+
+#header {
+}
+
+#content {
+	margin-top: 50px;
+}
+
+#points {
+	font-size: 280%;
+	color: black;
+}
+
+#label {
+	color: black;
+	font-size: 280%;
+}
+
+#score {
+	margin-top: 50px;
+	text-align: center;
+}
+
+#app {
+	margin: 0 auto;
+	width: 500px;
+	height: 600px;
+}
